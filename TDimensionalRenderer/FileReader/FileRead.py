@@ -16,7 +16,7 @@ def File_create(fn):
     fin = open(f,"rb")
     
     read = fin.read()
-    print(read)
+    #print(read)
     
     global Pointer
     global Facer
@@ -35,7 +35,7 @@ def File_create(fn):
         q = xyzer(i)
         PoiL[q[0]] = q[1]
     
-    print(PoiL)
+    #print(PoiL)
     
     FaceL = FaceMan(Facer)
     
@@ -68,11 +68,11 @@ def FaceMan(Fe):
     Fe = Fe.split(sep.to_bytes(1, "big"))
     FeCl = {}
     for i in Fe:
-        print(i)
+        #print(i)
         i = i.split(tsep.to_bytes(1, "big"))
         i[1] = i[1].split(xsep.to_bytes(1, "big"))
         hex = "#"
-        print(i)
+        #print(i)
         for j in i[1][3]:
             hex += hexy[j]
         xyzh = [numcon(i[1][0]),numcon(i[1][1]),numcon(i[1][2]),hex]

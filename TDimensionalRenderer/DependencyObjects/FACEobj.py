@@ -1,7 +1,8 @@
 from GenMathClass import Mclass
+import math
 
 met = Mclass()
-class FaceM():
+class FaceMaster():
     global A
     global B
     global C
@@ -13,7 +14,7 @@ class FaceM():
     global planeQ
     global col
     
-    def init(self,pA,pB,pC,col):
+    def __init__(self,pA,pB,pC,col):
         self.A = pA
         self.B = pB
         self.C = pC
@@ -33,21 +34,28 @@ class FaceM():
         l2 = P[1]-(P[0]*self.BC[0]) - self.BC[1]
         l3 = P[1]-(P[0]*self.CA[0]) - self.CA[1]
         L = []
-        if l1 > 0:
+        
+        if l1 <= 0.001*(math.sqrt((self.AB[0]**2 + 1))) and l1 >= 0.001*(-math.sqrt((self.AB[0]**2 + 1))):
+            L.append(2)
+        elif l1 > 0:
             L.append(0)
         elif l1 == 0:
             L.append(2)
         else:
             L.append(1)
             
-        if l2 > 0:
+        if l2 <= 0.001*(math.sqrt((self.BC[0]**2 + 1))) and l2 >= 0.001*(-math.sqrt((self.BC[0]**2 + 1))):
+            L.append(2)
+        elif l2 > 0:
             L.append(0)
         elif l2 == 0:
             L.append(2)
         else:
             L.append(1)
         
-        if l3 > 0:
+        if l3 <= 0.001*(math.sqrt((self.CA[0]**2 + 1))) and l3 >= 0.001*(-math.sqrt((self.CA[0]**2 + 1))):
+            L.append(2)
+        elif l3 > 0:
             L.append(0)
         elif l3 == 0:
             L.append(2)
@@ -76,6 +84,7 @@ class FaceM():
         self.planeQ = L
     
     def Lin_r(self,a,b):
+        print(a ,b)
         tan = (b[1] - a[1])/(b[0] - a[0])
         c =  a[1] - (tan*a[0])
         L = [tan,c]

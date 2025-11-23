@@ -1,2 +1,2 @@
-from .FACEobj import FaceM
+from .FACEobj import FaceMaster
 from .TDOBJECTobj import objection
