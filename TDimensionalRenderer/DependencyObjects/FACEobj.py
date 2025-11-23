@@ -26,6 +26,8 @@ class FaceMaster():
         
         self.cent = [((self.A[0]+self.B[0]+self.C[0])/3),((self.A[1]+self.B[1]+self.C[1])/3),((self.A[2]+self.B[2]+self.C[2])/3)]
         self.centIn = self.In(self.cent)
+        print(self.cent)
+        print(self.centIn)
         
         self.Plane()
         
@@ -35,7 +37,7 @@ class FaceMaster():
         l3 = P[1]-(P[0]*self.CA[0]) - self.CA[1]
         L = []
         
-        if l1 <= 0.001*(math.sqrt((self.AB[0]**2 + 1))) and l1 >= 0.001*(-math.sqrt((self.AB[0]**2 + 1))):
+        if l1 <= (math.sqrt((self.AB[0]**2 + 1))) and l1 >= (-math.sqrt((self.AB[0]**2 + 1))):
             L.append(2)
         elif l1 > 0:
             L.append(0)
@@ -44,7 +46,7 @@ class FaceMaster():
         else:
             L.append(1)
             
-        if l2 <= 0.001*(math.sqrt((self.BC[0]**2 + 1))) and l2 >= 0.001*(-math.sqrt((self.BC[0]**2 + 1))):
+        if l2 <= (math.sqrt((self.BC[0]**2 + 1))) and l2 >= (-math.sqrt((self.BC[0]**2 + 1))):
             L.append(2)
         elif l2 > 0:
             L.append(0)
@@ -53,7 +55,7 @@ class FaceMaster():
         else:
             L.append(1)
         
-        if l3 <= 0.001*(math.sqrt((self.CA[0]**2 + 1))) and l3 >= 0.001*(-math.sqrt((self.CA[0]**2 + 1))):
+        if l3 <= (math.sqrt((self.CA[0]**2 + 1))) and l3 >= (-math.sqrt((self.CA[0]**2 + 1))):
             L.append(2)
         elif l3 > 0:
             L.append(0)
@@ -66,14 +68,18 @@ class FaceMaster():
     
     def get_In(self,P):
         Ch = self.In(P)
-        if Ch == self.centIn():
+        if Ch == self.centIn:
             return 0
         else:
-            for i in Ch:
-                if i == 2:
+            '''for i in Ch:
+                q = 0
+                if i == 2 and q == self.centIn[Ch.index(i)]:
                     r = 2 + Ch.index(i)
                     return r
-            return 1
+                elif i == 1:
+                    q += 1'''
+            pass
+        return 1
             
     def Plane(self):
         AB = met.V_sub(self.B, self.A)
@@ -82,6 +88,10 @@ class FaceMaster():
         d = (L[0]*self.A[0] + L[1]*self.A[1] + L[2]*self.A[2])*(-1)
         L.append(d)
         self.planeQ = L
+    
+    def get_Z(self,a):
+        z = (self.planeQ[3] - (self.planeQ[0]*a[0]) - (self.planeQ[1]*a[1]))/self.planeQ[2]
+        return z
     
     def Lin_r(self,a,b):
         print(a ,b)
